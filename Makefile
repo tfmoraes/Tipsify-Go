@@ -2,9 +2,9 @@ LDFLAGS += -L ${GOPATH}
 GCFLAGS += -I ${GOPATH}
 include ${GOROOT}/src/Make.inc
 
-TARG=ply_reader
+TARG=tipsify_sorter
 
 GOFILES=\
-        ply_reader.go\
+        tipsify_sorter.go\
 
 include ${GOROOT}/src/Make.cmd
