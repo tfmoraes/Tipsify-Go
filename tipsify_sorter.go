@@ -157,6 +157,7 @@ func ReadPly(ply_filename string) func() (int, string) {
 
 func main() {
 
+	buffer_size, _ := strconv.Atoi(os.Args[3])
 	ply_reader := ReadPly(os.Args[1])
 	var n_vertex, n_faces int
 
@@ -203,6 +204,6 @@ func main() {
 		faces[i][2], _ = strconv.Atoi(faces_s[3])
 	}
 	fmt.Println(n_vertex, n_faces)
-	O_faces := Tipsify(vertices, faces, 12)
+	O_faces := Tipsify(vertices, faces, buffer_size)
 	WritePly(os.Args[2], vertices, O_faces)
 }
