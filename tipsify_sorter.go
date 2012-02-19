@@ -6,6 +6,7 @@ import (
 	"bufio"
 	"strings"
 	"strconv"
+	"io"
 )
 
 func BuildAdjacency(V [][3]float64, I [][3]int) (A [][]int, L []int) {
@@ -136,7 +137,7 @@ func ReadPly(ply_filename string) func() (int, string) {
 		var output string
 		line, isPrefix, err := reader.ReadLine()
 		switch {
-		case err == os.EOF:
+		case err == io.EOF:
 			status = 0
 			output = ""
 		case isPrefix:
@@ -185,9 +186,9 @@ func main() {
 		}
 
 		vertex_s := strings.Split(line, " ")
-		vertices[i][0], _ = strconv.Atof64(vertex_s[0])
-		vertices[i][1], _ = strconv.Atof64(vertex_s[1])
-		vertices[i][2], _ = strconv.Atof64(vertex_s[2])
+		vertices[i][0], _ = strconv.ParseFloat(vertex_s[0], 64)
+		vertices[i][1], _ = strconv.ParseFloat(vertex_s[1], 64)
+		vertices[i][2], _ = strconv.ParseFloat(vertex_s[2], 64)
 	}
 
 	// Reading the faces.
