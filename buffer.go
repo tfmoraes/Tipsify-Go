@@ -1,34 +1,34 @@
 package main
 
-import "container/list"
-
 type Buffer struct {
 	i int
 	size int
-	data *list.List
+	data []int
 }
 
 func (b *Buffer) Push(k int) (bool) {
-	for e:=b.data.Front(); e != nil ; e = e.Next(){
-		if e.Value == k {
+	for i:=0; i < b.i ; i++{
+		if b.data[i] == k {
 			return false
 		}
 	}
 
 	if b.i == b.size {
 		b.Pop()
+		b.data = append(b.data, k)
+	} else {
+		b.data[b.i] = k
 	}
-	b.data.PushBack(k)
 	b.i++
 	return true
 }
 
 func (b *Buffer) Pop() {
+	b.data = b.data[1:]
 	b.i--
-	b.data.Remove(b.data.Front())
 }
 
 
 func NewBuffer (size int) (*Buffer) {
-	return &Buffer{0, size, list.New()}
+	return &Buffer{0, size, make([]int, size, size)}
 }
